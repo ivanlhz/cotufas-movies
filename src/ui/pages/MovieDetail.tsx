@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { ApiMovieRepository, GetMovieById } from '@/core/movies';
+import { FavoriteHeart } from '../atoms/FavoriteHeart';
+import { isFavorite, toggleFavorite } from '@/state/favorites';
 
 const MovieDetail = () => {
     const { movieId } = useParams();
@@ -26,7 +28,6 @@ const MovieDetail = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Button 
-        variant="ghost" 
         onClick={() => navigate('/')}
         className="mb-6 flex items-center gap-2 hover:bg-primary/20"
       >
@@ -42,13 +43,21 @@ const MovieDetail = () => {
               alt={movie.name} 
               className="w-full h-auto object-cover"
             />
+
           </div>
         </div>
         
         <div className="md:col-span-2">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          <div className="flex items-center gap-2 mb-2">
+          <FavoriteHeart 
+            isFavorite={isFavorite(movie.id).value} 
+            handleToggleFavorite={(e) => {e.stopPropagation(); toggleFavorite(movie.id)}} 
+          />
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
             {movie.name} <span className="text-gray-400">({movie.premiered})</span>
           </h1>
+          </div>
+   
           
           <div className="flex items-center gap-4 mb-6">
             <span className="bg-primary px-3 py-1 rounded-full text-white font-medium">

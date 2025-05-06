@@ -1,17 +1,39 @@
 import { useQuery } from "@tanstack/react-query";
 import MovieList from "../organisms/MovieList";
 import { ApiMovieRepository, GetMovies } from "@/core/movies";
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
+import { useFavoriteFilter } from "@/state/useFavoriteFilter";
 
 const Home = () => {
-  const repository = new ApiMovieRepository()
-  const moviesQuery = new GetMovies(repository)
-  const { data: movies } = useQuery({ queryKey: ['todos'], queryFn: () => moviesQuery.execute() })
+  const repository = new ApiMovieRepository();
+  const moviesQuery = new GetMovies(repository);
+  const { data: allMovies } = useQuery({ queryKey: ['movies'], queryFn: () => moviesQuery.execute() });
+  const { showOnlyFavorites, toggleShowOnlyFavorites, filteredMovies } = useFavoriteFilter(allMovies || []);
 
 
   return (
-    <>
-      {movies ? <MovieList movies={movies} /> : <h3>Movies not found</h3>}
-    </>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h1 className="text-4xl md:text-6xl font-bold text-center bg-gradient-to-br from-purple-500 to-pink-500 text-transparent bg-clip-text">
+            CotufaMovies
+          </h1>
+        </div>
+        <Button 
+          onClick={toggleShowOnlyFavorites}
+        >
+          <Heart className={showOnlyFavorites.value ? "fill-white" : ""} size={16} />
+          {showOnlyFavorites.value ? "Todas las películas" : "Solo favoritas"}
+        </Button>
+      </div>
+
+      {showOnlyFavorites.value && filteredMovies.value ? (
+        <MovieList movies={filteredMovies.value } />
+      ) : (
+        <MovieList movies={allMovies || []} />
+      )}
+    </div>
   );
 };
 

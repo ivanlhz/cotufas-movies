@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from "@/components/ui/card";
 import { Movie } from '@/core/movies';
+import { FavoriteHeart } from '../atoms/FavoriteHeart';
+import { isFavorite, toggleFavorite } from '@/state/favorites';
 
 interface MovieCardProps {
   movie: Movie;
@@ -31,6 +33,10 @@ const MovieCard = ({ movie }: MovieCardProps) => {
               {movie.rating.average}
             </span>
           </div>
+          <FavoriteHeart 
+            isFavorite={isFavorite(movie.id).value} 
+            handleToggleFavorite={(e) => {e.stopPropagation(); toggleFavorite(movie.id)}} 
+          />
         </div>
       </div>
       <CardContent className="p-4">

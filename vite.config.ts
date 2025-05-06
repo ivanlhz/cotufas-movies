@@ -5,7 +5,11 @@ import { resolve } from 'path'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react({
+    babel: {
+      plugins: [["module:@preact/signals-react-transform"]],
+    },
+  }), tailwindcss()],
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
