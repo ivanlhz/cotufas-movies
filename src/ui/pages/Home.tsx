@@ -28,8 +28,17 @@ const Home = () => {
         </Button>
       </div>
 
-      {showOnlyFavorites.value && filteredMovies.value ? (
-        <MovieList movies={filteredMovies.value } />
+      {showOnlyFavorites.value ? (
+        filteredMovies.value.length > 0 ? (
+          <MovieList movies={filteredMovies.value} />
+        ) : (
+          <div className="text-center py-10">
+            <h3 className="text-xl text-gray-400 mb-4">No tienes películas favoritas</h3>
+            <Button onClick={toggleShowOnlyFavorites}>
+              Ver todas las películas
+            </Button>
+          </div>
+        )
       ) : (
         <MovieList movies={allMovies || []} />
       )}
