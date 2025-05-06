@@ -4,7 +4,7 @@ import { MovieRepository } from "../domain/MovieRepository";
 export class GetMovieById {
   constructor(private movieRepository: MovieRepository) {}
 
-  async execute(id: number): Promise<Movie | null> {
+  async execute(id: string): Promise<Movie | null> {
     return this.movieRepository.getById(id);
   }
 }

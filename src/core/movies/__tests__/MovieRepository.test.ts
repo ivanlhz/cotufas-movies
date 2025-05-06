@@ -10,7 +10,7 @@ class FakeMovieRepository implements MovieRepository {
     return this.movies;
   }
 
-  async getById(id: number): Promise<Movie | null> {
+  async getById(id: string): Promise<Movie | null> {
     return this.movies.find(m => m.id === id) ?? null;
   }
 }
@@ -18,7 +18,7 @@ class FakeMovieRepository implements MovieRepository {
 describe('MovieRepository', () => {
   const movies: Movie[] = [
     {
-      id: 1,
+      id: "1",
       name: 'Test Movie',
       image: { medium: 'img1.jpg', original: 'img1-big.jpg' },
       summary: 'A test movie',
@@ -28,7 +28,7 @@ describe('MovieRepository', () => {
       officialSite: 'https://example.com',
     },
     {
-      id: 2,
+      id: "2",
       name: 'Another Movie',
       image: null,
       summary: 'Another summary',
@@ -48,13 +48,13 @@ describe('MovieRepository', () => {
   });
 
   it('getById devuelve la película correcta si existe', async () => {
-    const movie = await repo.getById(1);
+    const movie = await repo.getById("1");
     expect(movie).not.toBeNull();
     expect(movie?.name).toBe('Test Movie');
   });
 
   it('getById devuelve null si no existe', async () => {
-    const movie = await repo.getById(999);
+    const movie = await repo.getById("999");
     expect(movie).toBeNull();
   });
 });

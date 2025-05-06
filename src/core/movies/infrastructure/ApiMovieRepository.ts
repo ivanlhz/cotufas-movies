@@ -11,7 +11,7 @@ export class ApiMovieRepository implements MovieRepository {
     return data.map(mapApiShowToMovie);
   }
 
-  async getById(id: number): Promise<Movie | null> {
+  async getById(id: string): Promise<Movie | null> {
     const response = await fetch(`${this.apiUrl}/${id}`);
     if (!response.ok) return null;
     const data = await response.json();

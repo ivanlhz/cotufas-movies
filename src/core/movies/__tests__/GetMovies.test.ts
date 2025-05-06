@@ -8,15 +8,15 @@ class FakeMovieRepository implements MovieRepository {
   async getAll(): Promise<Movie[]> {
     return this.movies;
   }
-  async getById(id: number): Promise<Movie | null> {
+  async getById(id: string): Promise<Movie | null> {
     return this.movies.find(m => m.id === id) ?? null;
   }
 }
 
 describe('GetMovies', () => {
   const movies: Movie[] = [
-    { id: 1, name: 'Test', image: null, summary: '...', genres: [], premiered: '2020', rating: { average: 7 }, officialSite: undefined },
-    { id: 2, name: 'Otra', image: null, summary: '...', genres: [], premiered: '2021', rating: { average: null }, officialSite: undefined },
+    { id: "1", name: 'Test', image: null, summary: '...', genres: [], premiered: '2020', rating: { average: 7 }, officialSite: undefined },
+    { id: "2", name: 'Otra', image: null, summary: '...', genres: [], premiered: '2021', rating: { average: null }, officialSite: undefined },
   ];
   const repo = new FakeMovieRepository(movies);
   const getMovies = new GetMovies(repo);

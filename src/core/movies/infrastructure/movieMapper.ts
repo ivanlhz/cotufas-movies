@@ -1,7 +1,7 @@
 import { Movie } from "../domain/Movie";
 
 export interface ApiShow {
-  id: number;
+  id: string;
   name: string;
   image: { medium: string; original: string } | null;
   summary: string;

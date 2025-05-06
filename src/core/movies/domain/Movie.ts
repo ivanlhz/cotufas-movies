@@ -1,7 +1,5 @@
-// Dominio: Entidad Movie (película)
-
 export interface Movie {
-  id: number;
+  id: string;
   name: string;
   image: {
     medium: string;
