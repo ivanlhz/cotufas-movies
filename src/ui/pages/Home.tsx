@@ -9,7 +9,7 @@ const Home = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
+    <div className="min-h-screen ">
       {movies ? <MovieList movies={movies} /> : <h3>Movies not found</h3>}
     </div>
   );

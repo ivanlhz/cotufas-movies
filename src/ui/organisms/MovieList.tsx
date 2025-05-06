@@ -8,7 +8,7 @@ export interface MovieListProps {
 const MovieList = ({movies}: MovieListProps) => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-6xl font-bold mb-8 text-center bg-gradient-to-br from-purple-500 to-pink-500 text-transparent bg-clip-text">
+      <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center bg-gradient-to-br from-purple-500 to-pink-500 text-transparent bg-clip-text">
         CotufaMovies
       </h1>
       <h2 className="text-2xl font-extralight mb-8 text-center text-gray-200">

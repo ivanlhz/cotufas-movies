@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
 
-import { HomePage, NotFoundPage } from './routes';
+import { HomePage, NotFoundPage, MovieDetailPage } from './routes';
 
 function AppContent() {
   return (
@@ -13,6 +13,7 @@ function AppContent() {
             <HomePage />
           }
         />
+        <Route path='/movie/:movieId' element={<MovieDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

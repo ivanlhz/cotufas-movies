@@ -34,7 +34,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         </div>
       </div>
       <CardContent className="p-4">
-        <p className="text-gray-300 text-sm line-clamp-2">{movie.summary}</p>
+        <p className="text-gray-300 text-sm line-clamp-2" dangerouslySetInnerHTML={{ __html: movie.summary }} />
         <div className="mt-2 flex flex-wrap gap-1">
           {movie.genres.slice(0, 2).map((genre) => (
             <span 

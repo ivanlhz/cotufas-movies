@@ -4,7 +4,7 @@ import { ApiShow } from '../infrastructure/movieMapper';
 
 // Datos de ejemplo de la API externa
 const apiShow: ApiShow = {
-  id: 1,
+  id: "1",
   name: 'TVMaze Movie',
   image: { medium: 'img.jpg', original: 'img-big.jpg' },
   summary: 'Resumen',
@@ -44,14 +44,14 @@ describe('ApiMovieRepository', () => {
       ok: true,
       json: async () => apiShow,
     });
-    const movie = await repo.getById(1);
+    const movie = await repo.getById("1");
     expect(movie).not.toBeNull();
     expect(movie?.name).toBe('TVMaze Movie');
   });
 
   it('getById devuelve null si la respuesta no es ok', async () => {
     mockFetch.mockResolvedValueOnce({ ok: false });
-    const movie = await repo.getById(999);
+    const movie = await repo.getById("999");
     expect(movie).toBeNull();
   });
 });
