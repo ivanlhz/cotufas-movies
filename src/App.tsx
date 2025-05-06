@@ -1,16 +1,31 @@
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import { Suspense } from 'react';
+import NotFoundPage from '@/ui/pages/NotFound';
+import IndexPage from '@/ui/pages/Index';
 
 
-function App() {
-
+function AppContent() {
   return (
-    <>
-      <div>
-      <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  </div>
-    </>
-  )
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+                <IndexPage />
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+        <AppContent />
+    </Router>
+  );
+}
+
+export default App;
