@@ -4,16 +4,19 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import './index.css'
 import App from './App.tsx'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '@/ui/organisms/ErrorFallback'
+import './index.css'
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-       <QueryClientProvider client={queryClient}>
-          <App />
-       </QueryClientProvider>
-
+       <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <QueryClientProvider client={queryClient}>
+            <App />
+        </QueryClientProvider>
+       </ErrorBoundary>
   </StrictMode>,
 )
