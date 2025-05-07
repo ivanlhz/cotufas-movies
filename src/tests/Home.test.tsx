@@ -3,6 +3,8 @@ import { screen, fireEvent } from '@testing-library/react';
 import Home from '@/ui/pages/Home';
 import { renderWithProviders } from './utils/test-utils';
 import * as favoriteFilterModule from '@/state/useFavoriteFilter';
+import { Signal } from '@preact/signals-react';
+import { Movie } from '@/core/movies';
 
 vi.mock('@tanstack/react-query', async () => {
   const actual = await vi.importActual('@tanstack/react-query');
@@ -39,7 +41,7 @@ vi.mock('@tanstack/react-query', async () => {
 
 // Mock para el componente MovieList
 vi.mock('@/ui/organisms/MovieList', () => ({
-  default: ({ movies }: { movies: any[] }) => (
+  default: ({ movies }: { movies: Movie[] }) => (
     <div data-testid="movie-list">
       {movies.map(movie => (
         <div key={movie.id} data-testid={`movie-item-${movie.id}`}>{movie.name}</div>
@@ -74,10 +76,10 @@ describe('Home', () => {
     
     // Configurar el mock para useFavoriteFilter
     vi.mocked(favoriteFilterModule.useFavoriteFilter).mockReturnValue({
-      showOnlyFavorites: { value: false },
+      showOnlyFavorites: { value: false } as Signal<boolean>,
       toggleShowOnlyFavorites: vi.fn(),
-      filteredMovies: { value: [] }
-    } as any);
+      filteredMovies: { value: [] } as Signal<[]>
+    });
   });
 
   it('debe renderizar correctamente el título de la aplicación', () => {
@@ -97,10 +99,10 @@ describe('Home', () => {
     const mockToggleShowOnlyFavorites = vi.fn();
     
     vi.mocked(favoriteFilterModule.useFavoriteFilter).mockReturnValue({
-      showOnlyFavorites: { value: false },
+      showOnlyFavorites: { value: false } as Signal<boolean>,
       toggleShowOnlyFavorites: mockToggleShowOnlyFavorites,
-      filteredMovies: { value: [] }
-    } as any);
+      filteredMovies: { value: [] } as Signal<[]>
+    });
     
     renderWithProviders(<Home />);
     
@@ -112,10 +114,10 @@ describe('Home', () => {
 
   it('debe mostrar todas las películas cuando showOnlyFavorites es false', () => {
     vi.mocked(favoriteFilterModule.useFavoriteFilter).mockReturnValue({
-      showOnlyFavorites: { value: false },
+      showOnlyFavorites: { value: false } as Signal<boolean>,
       toggleShowOnlyFavorites: vi.fn(),
-      filteredMovies: { value: [] }
-    } as any);
+      filteredMovies: { value: [] } as Signal<[]>
+    });
     
     renderWithProviders(<Home />);
     
@@ -126,10 +128,10 @@ describe('Home', () => {
 
   it('debe mostrar solo películas favoritas cuando showOnlyFavorites es true', () => {
     vi.mocked(favoriteFilterModule.useFavoriteFilter).mockReturnValue({
-      showOnlyFavorites: { value: true },
+      showOnlyFavorites: { value: true } as Signal<boolean>,
       toggleShowOnlyFavorites: vi.fn(),
-      filteredMovies: mockFilteredMovies
-    } as any);
+      filteredMovies: mockFilteredMovies as Signal<Movie[]>,
+    });
     
     renderWithProviders(<Home />);
     
@@ -140,10 +142,10 @@ describe('Home', () => {
 
   it('debe mostrar mensaje cuando no hay favoritos y showOnlyFavorites es true', () => {
     vi.mocked(favoriteFilterModule.useFavoriteFilter).mockReturnValue({
-      showOnlyFavorites: { value: true },
+      showOnlyFavorites: { value: true } as Signal<boolean>,
       toggleShowOnlyFavorites: vi.fn(),
-      filteredMovies: { value: [] }
-    } as any);
+      filteredMovies: { value: [] } as Signal<[]>
+    });
     
     renderWithProviders(<Home />);
     
