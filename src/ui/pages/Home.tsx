@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import MovieList from "../organisms/MovieList";
+import { EmptyState } from "../molecules/EmptyState";
 import { ApiMovieRepository, GetMovies } from "@/core/movies";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
@@ -27,12 +28,11 @@ const Home = () => {
         filteredMovies.value.length > 0 ? (
           <MovieList movies={filteredMovies.value} />
         ) : (
-          <div className="text-center py-10">
-            <h3 className="text-xl text-gray-400 mb-4">No tienes películas favoritas</h3>
-            <Button onClick={toggleShowOnlyFavorites}>
-              Ver todas las películas
-            </Button>
-          </div>
+          <EmptyState
+            title="No tienes películas favoritas"
+            buttonText="Ver todas las películas"
+            onButtonClick={toggleShowOnlyFavorites}
+          />
         )
       ) : (
         <MovieList movies={allMovies || []} />

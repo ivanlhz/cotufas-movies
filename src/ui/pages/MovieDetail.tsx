@@ -5,6 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { ApiMovieRepository, GetMovieById } from '@/core/movies';
 import { FavoriteHeart } from '../atoms/FavoriteHeart';
 import { isFavorite, toggleFavorite } from '@/state/favorites';
+import { MovieImage } from '../atoms/MovieImage';
+import { RatingBadge } from '../atoms/RatingBadge';
+import { GenreBadge } from '../atoms/GenreBadge';
+import { NotFoundMessage } from '../molecules/NotFoundMessage';
 
 const MovieDetail = () => {
     const { movieId } = useParams();
@@ -17,10 +21,12 @@ const MovieDetail = () => {
   if (!movie) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold mb-4">Película no encontrada</h2>
-        <Button onClick={() => navigate('/')}>
-          Volver a la lista
-        </Button>
+        <NotFoundMessage 
+          title="Película no encontrada" 
+          subtitle="No pudimos encontrar la película solicitada"
+          linkText="Volver a la lista"
+          linkHref="/"
+        />
       </div>
     );
   }
@@ -38,9 +44,9 @@ const MovieDetail = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-1">
           <div className="rounded-lg overflow-hidden shadow-lg">
-            <img 
-              src={movie.image?.original} 
-              alt={movie.name} 
+            <MovieImage 
+              src={movie.image?.original || ''}
+              alt={movie.name}
               className="w-full h-auto object-cover"
             />
 
@@ -60,18 +66,14 @@ const MovieDetail = () => {
    
           
           <div className="flex items-center gap-4 mb-6">
-            <span className="bg-primary px-3 py-1 rounded-full text-white font-medium">
-              {movie.rating.average} / 10
-            </span>
+            <RatingBadge rating={movie.rating.average ?? 0} />
             <span className="text-gray-400">{movie.officialSite}</span>
           </div>
           
           <div className="flex flex-wrap gap-2 mb-6">
             {movie.genres.map(genre => (
-              <span key={genre} className="bg-secondary/30 px-3 py-1 rounded-full text-sm">
-                {genre}
-              </span>
-            ))}
+                <GenreBadge key={genre} genre={genre} className="px-3 py-1 rounded-full text-sm" />
+              ))} 
           </div>
           
           <div className="mb-6">
