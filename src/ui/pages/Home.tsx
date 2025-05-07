@@ -14,12 +14,7 @@ const Home = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-4xl md:text-6xl font-bold text-center bg-gradient-to-br from-purple-500 to-pink-500 text-transparent bg-clip-text">
-            CotufaMovies
-          </h1>
-        </div>
+      <div className="mb-6 w-full text-right">
         <Button 
           onClick={toggleShowOnlyFavorites}
         >
