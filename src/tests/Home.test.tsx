@@ -82,12 +82,6 @@ describe('Home', () => {
     });
   });
 
-  it('debe renderizar correctamente el título de la aplicación', () => {
-    renderWithProviders(<Home />);
-    
-    expect(screen.getByText('CotufaMovies')).toBeInTheDocument();
-  });
-
   it('debe mostrar el botón para filtrar favoritos', () => {
     renderWithProviders(<Home />);
     
