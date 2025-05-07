@@ -1,7 +1,7 @@
 // Barrel export para el dominio de películas
 export * from "./domain/Movie";
 export * from "./domain/MovieRepository";
-export * from "./domain/favoritesRepository";
+export * from "./domain/FavoritesRepository";
 export * from "./application/GetMovies";
 export * from "./application/GetMovieById";
 export * from "./application/ToggleFavorite";
