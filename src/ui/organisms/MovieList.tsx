@@ -1,5 +1,5 @@
 import { Movie } from '@/core/movies';
-import MovieCard from './MovieCard';
+import MovieCard from '../molecules/MovieCard';
 
 export interface MovieListProps {
     movies: Movie[]

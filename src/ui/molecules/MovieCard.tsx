@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from "@/components/ui/card";
 import { Movie } from '@/core/movies';
 import { FavoriteHeart } from '../atoms/FavoriteHeart';
+import { MovieImage } from '../atoms/MovieImage';
+import { RatingBadge } from '../atoms/RatingBadge';
+import { GenreBadge } from '../atoms/GenreBadge';
 import { isFavorite, toggleFavorite } from '@/state/favorites';
 
 interface MovieCardProps {
@@ -21,17 +24,14 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       onClick={handleClick}
     >
       <div className="relative h-[250px] w-full overflow-hidden">
-        <img    
-          src={movie.image?.original} 
-          alt={movie.name} 
-          className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-110"
+        <MovieImage
+          src={movie.image?.original || ''}
+          alt={movie.name}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-white text-lg">{movie.name}</h3>
-            <span className="bg-primary/80 text-white text-sm px-2 py-1 rounded-md">
-              {movie.rating.average}
-            </span>
+            <RatingBadge rating={movie.rating.average ?? 0} />
           </div>
           <FavoriteHeart 
             isFavorite={isFavorite(movie.id).value} 
@@ -43,12 +43,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         <p className="text-gray-300 text-sm line-clamp-2" dangerouslySetInnerHTML={{ __html: movie.summary }} />
         <div className="mt-2 flex flex-wrap gap-1">
           {movie.genres.slice(0, 2).map((genre) => (
-            <span 
-              key={genre} 
-              className="bg-secondary/30 text-xs px-2 py-1 rounded-md text-gray-300"
-            >
-              {genre}
-            </span>
+            <GenreBadge key={genre} genre={genre} />
           ))}
         </div>
       </CardContent>
