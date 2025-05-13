@@ -1,4 +1,4 @@
-import { FavoritesRepository } from "@/core/movies/domain/FavoritesRepository";
+import { FavoritesRepository } from "../domain/FavoritesRepository";
 
 export class ToggleFavorite {
   constructor(private repository: FavoritesRepository) {}
