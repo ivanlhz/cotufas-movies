@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import MovieCard from '@/ui/organisms/MovieCard';
+import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from './utils/test-utils';
 import * as favoritesModule from '@/state/favorites';
 import { Movie } from '@/core/movies';
+import MovieCard from '@/ui/molecules/MovieCard';
 
 // Mock para el módulo de navegación
 vi.mock('react-router-dom', async () => {
