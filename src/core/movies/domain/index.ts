@@ -1,3 +1,3 @@
-export * from './FavoritesRepository';
+export * from './FavoriteRepository';
 export * from './Movie';
 export * from './MovieRepository';

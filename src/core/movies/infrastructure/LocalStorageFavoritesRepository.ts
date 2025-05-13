@@ -1,6 +1,6 @@
-import { FavoritesRepository } from "../domain";
+import { FavoriteRepository } from "../domain";
 
-export class LocalStorageFavoritesRepository implements FavoritesRepository {
+export class LocalStorageFavoritesRepository implements FavoriteRepository {
   private readonly storageKey = 'favoriteMovies';
 
   getFavorites(): string[] {

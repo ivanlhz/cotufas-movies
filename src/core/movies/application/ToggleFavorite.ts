@@ -1,7 +1,7 @@
-import { FavoritesRepository } from "../domain/";
+import { FavoriteRepository } from "../domain/";
 
 export class ToggleFavorite {
-  constructor(private repository: FavoritesRepository) {}
+  constructor(private repository: FavoriteRepository) {}
 
   execute(movieId: string): string[] {
     return this.repository.toggleFavorite(movieId);
